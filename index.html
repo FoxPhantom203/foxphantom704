@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxPhantom203</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/scroll_bar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { cursor: url('assets/cursor.png'), auto; font-family: 'Righteous', cursive; }
+        .playfair { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-cover bg-center min-h-screen flex flex-col items-center text-white" style="background-image: url('https://cdn.pixabay.com/photo/2024/09/06/02/03/hill-9026381_1280.png');">
+
+    <header class="w-full p-6 flex justify-start gap-8 bg-black/50 backdrop-blur-md">
+        <a href="https://github.com/FoxPhantom203" class="flex items-center gap-2 hover:text-red-500 transition">
+            <img src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="GitHub"> Support me on GitHub
+        </a>
+        <a href="https://archive.org/details/@architect787" class="flex items-center gap-2 hover:text-red-500 transition">
+            <img src="https://www.google.com/s2/favicons?domain=archive.org&sz=32" alt="Archive"> Internet Archive
+        </a>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center text-center p-6">
+        <img src="assets/favicon.png" alt="Logo" class="w-32 h-32 mb-4">
+        <h1 class="text-6xl mb-6">FoxPhantom203</h1>
+        <p class="text-xl mb-8 max-w-2xl leading-relaxed">
+            I am a developer dedicated to crafting efficient, high-performance digital environments. From custom kernel architecture to sleek, responsive web interfaces, I leverage modern frameworks to build software that defies standard limitations. My work centers on technical sovereignty, ensuring every line of code serves a clear, functional purpose while maintaining a distinct visual identity. I am the architect of my own digital ecosystem, constantly optimizing for speed, reliability, and precision.
+        </p>
+        
+        <h2 class="text-5xl mb-10 playfair">CREATIONS I DID</h2>
+        
+        <div class="grid grid-cols-1 gap-6 w-full max-w-sm">
+            <!-- ROMs Card -->
+            <a href="https://archive.org/details/roms_20260626" class="bg-gray-500 p-6 rounded-lg shadow-lg border border-white/20 hover:scale-105 transition flex flex-col items-center">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M7 8h10M7 12h10M7 16h6" />
+                </svg>
+                <span class="text-xl font-bold">ROMs</span>
+                <span class="text-xs mt-1 opacity-75">Fan assembled, independent.</span>
+            </a>
+        </div>
+
+        <a href="https://coming.soon" class="mt-12 p-4 border-2 border-white rounded-lg hover:bg-white hover:text-black transition">
+            <svg width="200" height="40"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Righteous" font-size="24" fill="currentColor">COMING SOON</text></svg>
+        </a>
+    </main>
+</body>
+</html>
