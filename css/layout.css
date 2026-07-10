@@ -1,0 +1,16 @@
+.bio-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    gap: 20px;
+}
+
+.left-side { flex: 1; text-align: left; }
+.right-side { flex: 2; line-height: 1.6; }
+
+/* Ensures your 350-860 character bio looks great */
+.bio-text {
+    font-size: 1.2rem;
+    color: #333;
+}

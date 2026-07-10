@@ -1,0 +1,6 @@
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .bio-container {
+        flex-direction: column;
+    }
+}
