@@ -19,6 +19,25 @@
     <style>
         body { cursor: url('assets/cursor.png'), auto; font-family: 'Righteous', cursive; }
         .playfair { font-family: 'Playfair Display', serif; }
+        .favorites-container {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+        .favorites-grid {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem;
+        }
+        .repo-card {
+            min-width: 280px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: white;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="bg-cover bg-center min-h-screen flex flex-col items-center text-white" style="background-image: url('https://cdn.pixabay.com/photo/2024/09/06/02/03/hill-9026381_1280.png');">
@@ -66,7 +85,6 @@
                     <span class="text-xs mt-1 opacity-75">Fan assembled, independent.</span>
                 </a>
 
-                <!-- Added new project -->
                 <a href="https://github.com/FoxPhantom203/foxphantom704" class="project-card">
                     <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2">
                         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -81,6 +99,18 @@
                 <div class="project-card dummy-card"><span class="text-xl font-bold">Project 5</span><span class="text-xs mt-1 opacity-50">Sample Slot</span></div>
 
             </div>
+        </div>
+
+        <!-- New Favorites Section -->
+        <h2 class="text-5xl mb-6 playfair mt-12">FAVORITE REPOSITORIES I USE</h2>
+        <p class="mb-6 max-w-md text-lg">Some of the awesome open-source projects and tools I star and use regularly.</p>
+        
+        <div class="favorites-container w-full px-4 mb-12">
+            <iframe src="https://github.com/FoxPhantom203?tab=stars" 
+                    width="100%" 
+                    height="600" 
+                    frameborder="0" 
+                    style="border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; background: rgba(0,0,0,0.3);"></iframe>
         </div>
     </main>
 
