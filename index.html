@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoxPhantom203</title>
+    <title>FoxPhantom Portfolio Template</title>
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Playfair+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/scroll_bar.css">
@@ -24,84 +24,24 @@
             overflow-x: auto;
             padding-bottom: 15px;
         }
-        .favorites-grid {
-            display: flex;
-            gap: 1.5rem;
-            padding: 0.5rem;
-        }
-        .repo-card {
-            min-width: 280px;
-            background-color: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            color: white;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body class="bg-cover bg-center min-h-screen flex flex-col items-center text-white" style="background-image: url('https://cdn.pixabay.com/photo/2024/09/06/02/03/hill-9026381_1280.png');">
 
     <header class="w-full p-6 flex justify-start gap-8 bg-black/50 backdrop-blur-md">
-        <a href="https://github.com/FoxPhantom203" class="flex items-center gap-2 hover:text-red-500 transition">
-            <img src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="GitHub"> Support me on GitHub
-        </a>
-        <a href="https://archive.org/details/@architect787" class="flex items-center gap-2 hover:text-red-500 transition">
-            <img src="https://www.google.com/s2/favicons?domain=archive.org&sz=32" alt="Archive"> Internet Archive
+        <a href="https://github.com/FoxPhantom203/foxphantom704" class="flex items-center gap-2 hover:text-red-500 transition">
+            <img src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="GitHub"> GitHub Template
         </a>
     </header>
 
     <main class="flex-grow flex flex-col items-center justify-center text-center p-6 w-full max-w-6xl">
         <img src="https://raw.githubusercontent.com/FoxPhantom203/foxphantom704/main/assets/favicon.png" alt="Logo" class="w-32 h-32 mb-4">
-        <h1 class="text-6xl mb-6">FoxPhantom203</h1>
+        <h1 class="text-6xl mb-6">FoxPhantom Template</h1>
         <p class="text-xl mb-8 max-w-2xl leading-relaxed">
-            I am a developer dedicated to crafting efficient, high-performance digital environments. From custom kernel architecture to sleek, responsive web interfaces, I leverage modern frameworks to build software that defies standard limitations. My work centers on technical sovereignty, ensuring every line of code serves a clear, functional purpose while maintaining a distinct visual identity. I am the architect of my own digital ecosystem, constantly optimizing for speed, reliability, and precision.
+            A clean, modern portfolio template for developers and creators. Fork it, customize it, and build your own digital presence.
         </p>
-        
-        <h2 class="text-5xl mb-6 playfair">CREATIONS I DID</h2>
-        
-        <div class="mb-8 w-full max-w-md px-4">
-            <input type="text" id="projectSearch" placeholder="Search projects..." class="w-full p-3 rounded-lg bg-black/40 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:border-white transition">
-        </div>
 
-        <div class="projects-container w-full px-4 mb-8">
-            <div id="projectsSlider" class="projects-slider">
-                
-                <a href="https://coming.soon" class="project-card coming-soon-card">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    <span class="text-xl font-bold">COMING SOON</span>
-                    <span class="text-xs mt-1 opacity-75">Next drop brewing...</span>
-                </a>
-
-                <a href="https://archive.org/details/roms_20260626" class="project-card">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <path d="M7 8h10M7 12h10M7 16h6" />
-                    </svg>
-                    <span class="text-xl font-bold">ROMs</span>
-                    <span class="text-xs mt-1 opacity-75">Fan assembled, independent.</span>
-                </a>
-
-                <a href="https://github.com/FoxPhantom203/foxphantom704" class="project-card">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                    <span class="text-xl font-bold">This Portfolio</span>
-                    <span class="text-xs mt-1 opacity-75">Self-referential digital showcase</span>
-                </a>
-
-                <div class="project-card dummy-card"><span class="text-xl font-bold">Project 3</span><span class="text-xs mt-1 opacity-50">Sample Slot</span></div>
-                <div class="project-card dummy-card"><span class="text-xl font-bold">Project 4</span><span class="text-xs mt-1 opacity-50">Sample Slot</span></div>
-                <div class="project-card dummy-card"><span class="text-xl font-bold">Project 5</span><span class="text-xs mt-1 opacity-50">Sample Slot</span></div>
-
-            </div>
-        </div>
-
-        <!-- New Favorites Section -->
+        <!-- Favorites Section remains -->
         <h2 class="text-5xl mb-6 playfair mt-12">FAVORITE REPOSITORIES I USE</h2>
         <p class="mb-6 max-w-md text-lg">Some of the awesome open-source projects and tools I star and use regularly.</p>
         
@@ -115,19 +55,7 @@
     </main>
 
     <script>
-        document.getElementById('projectSearch').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.project-card');
-            
-            cards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                if(text.includes(searchTerm)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
+        // Search removed as projects section is gone
     </script>
 </body>
 </html>
