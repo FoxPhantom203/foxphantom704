@@ -1,0 +1,101 @@
+/* ==========================================================================
+   Projects Grid / Slider Configuration
+   ========================================================================== */
+
+/* The outer viewport holding the slider */
+.projects-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 15px; /* Space for the custom scrollbar */
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* The actual track containing your project items */
+.projects-slider {
+    display: flex;
+    gap: 1.5rem; /* Equivalent to gap-6 */
+    padding: 0.5rem;
+    margin: 0 auto; /* Centers the list if it doesn't overflow */
+    max-width: 100%;
+}
+
+/* Base Card Styles (Removes the old grey background) */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 280px; /* Uniform card width for horizontal layout */
+    min-width: 280px; 
+    height: 180px;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.4); /* Transparent glassmorphism instead of flat gray */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Specific Style for Coming Soon Card to stand out as requested */
+.coming-soon-card {
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.coming-soon-card:hover {
+    border-style: solid;
+    border-color: #ffffff;
+}
+
+/* Hide extra cards past your limit of 50 items */
+.project-card:nth-child(n+51) {
+    display: none !important;
+}
+
+/* Placeholder styling for empty/test cards */
+.dummy-card {
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   Custom White Scrollbar Customization
+   ========================================================================== */
+
+/* Width and Track dimensions */
+.projects-container::-webkit-scrollbar {
+    height: 6px; /* Sleek horizontal track thickness */
+}
+
+/* Background of the scrollbar track */
+.projects-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* The actual moving bar - Solid White */
+.projects-container::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Darken slightly on hover for physical feedback */
+.projects-container::-webkit-scrollbar-thumb:hover {
+    background: #e0e0e0;
+}
+
+/* Standards-compliant scrollbar fallback for Firefox */
+.projects-container {
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff rgba(255, 255, 255, 0.1);
+}
