@@ -42,10 +42,11 @@
         #clock {
             cursor: pointer;
             font-size: 1.1rem;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
         }
         #clock:hover {
-            transform: scale(1.1);
+            transform: scale(1.08);
+            color: #fef08c;
         }
     </style>
 </head>
@@ -53,7 +54,7 @@
 
     <header class="w-full p-6 flex justify-between items-center bg-black/50 backdrop-blur-md">
         <div class="flex items-center gap-8">
-            <div id="clock" onclick="timeTravel()" class="flex items-center gap-2 hover:text-yellow-300 transition">
+            <div id="clock" class="flex items-center gap-2 hover:text-yellow-300 transition">
                 <span id="time-display">00:00</span>
             </div>
             <a href="https://github.com/FoxPhantom203/foxphantom704" class="flex items-center gap-2 hover:text-red-500 transition">
@@ -98,7 +99,6 @@
         </div>
     </div>
 
-    <!-- Seasonal elements container -->
     <div id="season-elements"></div>
 
     <main class="flex-grow flex flex-col items-center justify-center text-center p-6 w-full max-w-6xl relative z-10">
@@ -106,9 +106,28 @@
         <h1 class="text-6xl mb-6">FoxPhantom Template</h1>
         <p class="text-xl mb-8 max-w-2xl leading-relaxed">
             A clean, modern portfolio / website template for developers and creators. Fork it, customize it, and build your own digital presence.<br>
-            <span class="text-sm opacity-75">Click the clock for time travel (concept demo)</span>
+            <span class="text-sm opacity-75">Click the clock (top-left) for seasonal time travel</span>
         </p>
     </main>
+
+    <script type="module">
+        import { applySeason, getRealSeason } from './js/season.js';
+        import { initClock } from './js/clock.js';
+
+        // Initialize everything
+        function initialize() {
+            // Real season on load
+            const realSeason = getRealSeason();
+            applySeason(realSeason);
+
+            // Clock + time travel
+            initClock();
+
+            console.log('%c🌍 Seasonal system + Time Travel active (pure CSS animations). No emojis used.', 'color: #67e8f9; font-size: 13px;');
+        }
+
+        window.onload = initialize;
+    </script>
 
     <script>
         function toggleLinks() {
@@ -118,93 +137,6 @@
         document.getElementById('linksModal').addEventListener('click', function(e) {
             if (e.target === this) toggleLinks();
         });
-
-        // Seasonal logic
-        function getCurrentSeason() {
-            const now = new Date();
-            const month = now.getMonth() + 1; // 1-12
-            const day = now.getDate();
-
-            if ((month === 3 && day >= 1) || (month === 4) || (month === 5) || (month === 5 && day <= 31)) return 'spring';
-            if ((month >= 6 && month <= 8)) return 'summer';
-            if ((month === 9 && day >= 1) || (month === 10) || (month === 11)) return 'autumn';
-            return 'winter'; // Dec, Jan, Feb
-        }
-
-        function applySeason(season) {
-            document.body.classList.remove('spring', 'summer', 'autumn', 'winter');
-            document.body.classList.add(season);
-
-            const elements = document.getElementById('season-elements');
-            elements.innerHTML = '';
-
-            if (season === 'summer') {
-                const sun = document.createElement('div');
-                sun.className = 'sun';
-                elements.appendChild(sun);
-            } else if (season === 'winter') {
-                // Snowflakes
-                for (let i = 0; i < 60; i++) {
-                    const flake = document.createElement('div');
-                    flake.className = 'snowflake';
-                    flake.textContent = ['❄', '❅', '❆'][Math.floor(Math.random()*3)];
-                    flake.style.left = Math.random() * 100 + 'vw';
-                    flake.style.animationDuration = (Math.random() * 8 + 6) + 's';
-                    flake.style.opacity = Math.random() * 0.6 + 0.4;
-                    flake.style.fontSize = (Math.random() * 1.2 + 0.8) + 'em';
-                    elements.appendChild(flake);
-                }
-                // Reindeer
-                const reindeer = document.createElement('div');
-                reindeer.className = 'reindeer';
-                reindeer.textContent = '🦌';
-                elements.appendChild(reindeer);
-                // Husky hint
-                console.log('%cA husky is adoring the snow nearby 🐺', 'color: #60a5fa; font-size: 14px;');
-            }
-        }
-
-        // Time travel feature
-        let currentSeasonIndex = 0;
-        const seasons = ['spring', 'summer', 'autumn', 'winter'];
-        const seasonNames = ['March (Spring)', 'June (Summer)', 'September (Autumn)', 'December (Winter)'];
-
-        function timeTravel() {
-            currentSeasonIndex = (currentSeasonIndex + 1) % 4;
-            const newSeason = seasons[currentSeasonIndex];
-            applySeason(newSeason);
-
-            const timeDisplay = document.getElementById('time-display');
-            timeDisplay.textContent = seasonNames[currentSeasonIndex];
-            timeDisplay.style.color = '#fef08c';
-
-            // Brief title change
-            document.title = 'Time Travelling... ' + seasonNames[currentSeasonIndex];
-            setTimeout(() => {
-                document.title = 'FoxPhantom Portfolio Template';
-            }, 2000);
-        }
-
-        // Initialize clock and season
-        function updateClock() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('time-display').textContent = timeStr;
-        }
-
-        // Init
-        window.onload = function() {
-            // Real season on load
-            const realSeason = getCurrentSeason();
-            applySeason(realSeason);
-
-            // Real time clock
-            updateClock();
-            setInterval(updateClock, 30000);
-
-            // Easter egg hint
-            console.log('%cSeasonal decorations active. Click the clock to time travel (demo).', 'color: #a5b4fc;');
-        };
     </script>
 </body>
 </html>
