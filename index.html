@@ -43,6 +43,7 @@
             cursor: pointer;
             font-size: 1.1rem;
             transition: all 0.3s ease;
+            user-select: none;
         }
         #clock:hover {
             transform: scale(1.08);
@@ -110,25 +111,99 @@
         </p>
     </main>
 
-    <script src="js/season.js"></script>
-    <script src="js/clock.js"></script>
     <script>
+        // === FULLY INLINE SEASON + CLOCK LOGIC (synchronous & reliable) ===
+        let currentSeason = 'summer';
+
+        function getRealSeason() {
+            const month = new Date().getMonth() + 1;
+            if (month >= 3 && month <= 5) return 'spring';
+            if (month >= 6 && month <= 8) return 'summer';
+            if (month >= 9 && month <= 11) return 'autumn';
+            return 'winter';
+        }
+
+        function applySeason(season) {
+            currentSeason = season;
+            document.body.classList.remove('spring','summer','autumn','winter');
+            document.body.classList.add(season);
+
+            const container = document.getElementById('season-elements');
+            container.innerHTML = '';
+
+            if (season === 'summer') {
+                const sun = document.createElement('div');
+                sun.className = 'sun';
+                container.appendChild(sun);
+            } else if (season === 'winter') {
+                const snowLayer = document.createElement('div');
+                snowLayer.className = 'snow-layer';
+                for (let i = 0; i < 45; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'snow-particle';
+                    p.textContent = '❄';
+                    p.style.left = Math.random() * 100 + 'vw';
+                    p.style.animationDuration = (8 + Math.random() * 7) + 's';
+                    p.style.opacity = 0.6 + Math.random() * 0.4;
+                    snowLayer.appendChild(p);
+                }
+                container.appendChild(snowLayer);
+            }
+        }
+
+        // Clock + Time Travel
+        function initClock() {
+            const clock = document.getElementById('clock');
+            const display = document.getElementById('time-display');
+
+            let seasonIndex = 0;
+            const seasons = ['spring', 'summer', 'autumn', 'winter'];
+            const labels = ['March (Spring)', 'June (Summer)', 'September (Autumn)', 'December (Winter)'];
+
+            function updateTime() {
+                const now = new Date();
+                display.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            updateTime();
+            setInterval(updateTime, 15000);
+
+            clock.addEventListener('click', () => {
+                seasonIndex = (seasonIndex + 1) % 4;
+                applySeason(seasons[seasonIndex]);
+
+                display.textContent = labels[seasonIndex];
+                display.style.color = '#fef08c';
+
+                document.title = 'Time Travelling...';
+                setTimeout(() => document.title = 'FoxPhantom Portfolio Template', 1200);
+            });
+        }
+
+        // Battery Status (if available)
+        function showBatteryStatus() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(battery => {
+                    console.log(`%cBattery: ${Math.floor(battery.level * 100)}%`, 'color: #86efac;');
+                    // Could display in UI if desired
+                });
+            }
+        }
+
+        // Initialize everything synchronously
+        window.addEventListener('load', () => {
+            applySeason(getRealSeason());
+            initClock();
+            showBatteryStatus();
+            console.log('%c✅ Clock + Seasons fully active. Click clock to time travel.', 'color: #67e8f9; font-weight: bold;');
+        });
+
         function toggleLinks() {
             const modal = document.getElementById('linksModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
         document.getElementById('linksModal').addEventListener('click', function(e) {
             if (e.target === this) toggleLinks();
-        });
-
-        // Global init when scripts load
-        window.addEventListener('load', function() {
-            if (typeof getRealSeason === 'function' && typeof applySeason === 'function' && typeof initClock === 'function') {
-                const realSeason = getRealSeason();
-                applySeason(realSeason);
-                initClock();
-                console.log('%cSeasonal system + Time Travel active (pure CSS). Click clock to cycle seasons.', 'color: #67e8f9; font-size: 13px;');
-            }
         });
     </script>
 </body>
