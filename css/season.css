@@ -1,130 +1,121 @@
-/* Season.css - Seasonal decorations and effects */
+/* season.css - Pure CSS seasonal decorations & smooth animations */
 
-/* Base seasonal body classes */
-.spring { 
-    --accent: #4ade80;
-}
+/* Global seasonal accents */
+body.spring { --accent-color: #86efac; }
+body.summer { --accent-color: #fde047; }
+body.autumn { --accent-color: #fb923c; }
+body.winter { --accent-color: #93c5fd; }
 
-.summer { 
-    --accent: #fbbf24;
-}
-
-.autumn { 
-    --accent: #f97316;
-}
-
-.winter { 
-    --accent: #60a5fa;
-}
-
-/* Spring: Animated Dandelions */
-.spring::before {
+/* SPRING - Gentle floating dandelions */
+body.spring::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: dandelion-float 25s linear infinite;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(163, 230, 187, 0.25) 1px, transparent 2px),
+        radial-gradient(circle at 60% 70%, rgba(163, 230, 187, 0.2) 1px, transparent 2px),
+        radial-gradient(circle at 80% 20%, rgba(163, 230, 187, 0.25) 1px, transparent 2px);
+    background-size: 120px 120px;
+    animation: dandelion-drift 45s linear infinite;
+    opacity: 0.7;
     z-index: 1;
-    opacity: 0.6;
 }
 
-@keyframes dandelion-float {
+@keyframes dandelion-drift {
     0% { background-position: 0 0; }
-    100% { background-position: 200px 200px; }
+    100% { background-position: 300px 400px; }
 }
 
-/* Summer: Shining Sun */
-.summer .sun {
+/* SUMMER - Heating Sun */
+body.summer .sun {
     position: fixed;
-    top: 80px;
-    right: 80px;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, #fef08c 20%, #facc15 60%, transparent 80%);
+    top: 15%;
+    right: 12%;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, #fefce8 30%, #facc15 65%, #eab308 90%);
     border-radius: 50%;
-    box-shadow: 0 0 80px #fbbf24, 0 0 160px #f59e0b;
-    animation: shine 4s ease-in-out infinite alternate;
+    box-shadow: 
+        0 0 60px #fde047,
+        0 0 140px #f59e0b,
+        0 0 220px #ca8a04;
+    animation: sun-heat 6s ease-in-out infinite alternate;
     z-index: 2;
 }
 
-@keyframes shine {
-    from { box-shadow: 0 0 60px #fbbf24; }
-    to { box-shadow: 0 0 120px #f59e0b, 0 0 200px #fef08c; }
-}
-
-/* Autumn: Orange Maple Leaves */
-.autumn::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: url('https://picsum.photos/id/1015/1920/1080') repeat;
-    opacity: 0.15;
-    animation: maple-fall 20s linear infinite;
-    z-index: 1;
-}
-
-@keyframes maple-fall {
-    0% { transform: translateY(-100px) rotate(0deg); }
-    100% { transform: translateY(2000px) rotate(720deg); }
-}
-
-/* Winter: Snow + Aurora */
-.winter {
-    background-image: linear-gradient(to bottom, #0f172a, #1e2937) !important;
-}
-
-.winter::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 40%;
-    background: linear-gradient(180deg, #22d3ee 0%, #3b82f6 40%, transparent);
-    opacity: 0.4;
-    animation: aurora 30s linear infinite;
-    z-index: 1;
-}
-
-@keyframes aurora {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-100px); }
-}
-
-.snowflake {
-    position: fixed;
-    color: #e0f2fe;
-    font-size: 1.2em;
-    pointer-events: none;
-    animation: snowfall linear infinite;
-    z-index: 5;
-}
-
-@keyframes snowfall {
+@keyframes sun-heat {
+    from {
+        box-shadow: 0 0 60px #fde047, 0 0 120px #f59e0b;
+        transform: scale(0.95);
+    }
     to {
-        transform: translateY(100vh);
+        box-shadow: 0 0 140px #facc15, 0 0 260px #eab308;
+        transform: scale(1.05);
     }
 }
 
-/* Reindeer & Husky placeholders - use emoji or simple CSS for demo */
-.winter .reindeer {
+/* AUTUMN - Falling maple leaves (pure CSS) */
+body.autumn::after {
+    content: '';
     position: fixed;
-    bottom: 100px;
-    left: 10%;
-    font-size: 4rem;
-    animation: run-reindeer 8s linear infinite;
-    z-index: 10;
+    inset: 0;
+    pointer-events: none;
+    background-image: 
+        linear-gradient(transparent 40%, rgba(249, 115, 22, 0.12) 50%, transparent 60%);
+    animation: maple-rain 28s linear infinite;
+    z-index: 1;
+    opacity: 0.65;
 }
 
-@keyframes run-reindeer {
-    0% { transform: translateX(-200px); }
-    100% { transform: translateX(120vw); }
+@keyframes maple-rain {
+    0% { transform: translateY(-30%) rotate(0deg); }
+    100% { transform: translateY(120vh) rotate(1080deg); }
+}
+
+/* WINTER - Aurora + Snow */
+body.winter {
+    background-image: linear-gradient(#0f172a 30%, #1e3a8a 70%, #312e81) !important;
+}
+
+body.winter::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    background: linear-gradient(90deg, #22d3ee 10%, #67e8f9 30%, #22d3ee 70%, #a5f3fc);
+    opacity: 0.35;
+    filter: blur(8px);
+    animation: aurora-wave 35s linear infinite;
+    z-index: 1;
+}
+
+@keyframes aurora-wave {
+    0%, 100% { transform: translateX(-15%); }
+    50% { transform: translateX(15%); }
+}
+
+/* Snow particles */
+body.winter .snow-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.snow-particle {
+    position: absolute;
+    color: #e0f2fe;
+    font-size: 18px;
+    text-shadow: 0 0 6px #bae6fd;
+    animation: snow-fall linear forwards;
+    opacity: 0.85;
+}
+
+@keyframes snow-fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
 }
