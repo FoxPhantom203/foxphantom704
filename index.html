@@ -110,25 +110,8 @@
         </p>
     </main>
 
-    <script type="module">
-        import { applySeason, getRealSeason } from './js/season.js';
-        import { initClock } from './js/clock.js';
-
-        // Initialize everything
-        function initialize() {
-            // Real season on load
-            const realSeason = getRealSeason();
-            applySeason(realSeason);
-
-            // Clock + time travel
-            initClock();
-
-            console.log('%c🌍 Seasonal system + Time Travel active (pure CSS animations). No emojis used.', 'color: #67e8f9; font-size: 13px;');
-        }
-
-        window.onload = initialize;
-    </script>
-
+    <script src="js/season.js"></script>
+    <script src="js/clock.js"></script>
     <script>
         function toggleLinks() {
             const modal = document.getElementById('linksModal');
@@ -136,6 +119,16 @@
         }
         document.getElementById('linksModal').addEventListener('click', function(e) {
             if (e.target === this) toggleLinks();
+        });
+
+        // Global init when scripts load
+        window.addEventListener('load', function() {
+            if (typeof getRealSeason === 'function' && typeof applySeason === 'function' && typeof initClock === 'function') {
+                const realSeason = getRealSeason();
+                applySeason(realSeason);
+                initClock();
+                console.log('%cSeasonal system + Time Travel active (pure CSS). Click clock to cycle seasons.', 'color: #67e8f9; font-size: 13px;');
+            }
         });
     </script>
 </body>
