@@ -1,35 +1,31 @@
-// clock.js - Clock and time travel UI
+// js/clock.js - Clock + time travel
 
-import { applySeason, seasonsOrder, seasonConfig } from './season.js';
+window.initClock = function() {
+    const clock = document.getElementById('clock');
+    if (!clock) return;
 
-let seasonIndex = 0;
+    let seasonIndex = 0;
+    const seasonCycle = ['spring', 'summer', 'autumn', 'winter'];
+    const seasonLabels = ['March (Spring)', 'June (Summer)', 'September (Autumn)', 'December (Winter)'];
 
-function initClock() {
-    const clockEl = document.getElementById('clock');
-    if (!clockEl) return;
-
-    function updateTime() {
+    function updateRealTime() {
         const now = new Date();
-        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        clockEl.querySelector('#time-display').textContent = timeStr;
+        document.getElementById('time-display').textContent = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
     }
 
-    updateTime();
-    setInterval(updateTime, 30000);
+    updateRealTime();
+    setInterval(updateRealTime, 20000);
 
-    clockEl.addEventListener('click', () => {
-        seasonIndex = (seasonIndex + 1) % seasonsOrder.length;
-        const newSeason = seasonsOrder[seasonIndex];
-        applySeason(newSeason);
+    clock.addEventListener('click', function() {
+        seasonIndex = (seasonIndex + 1) % 4;
+        const newSeason = seasonCycle[seasonIndex];
+        window.applySeason(newSeason);
 
         const display = document.getElementById('time-display');
-        display.textContent = seasonConfig[newSeason].name;
-        display.style.transition = 'color 0.4s';
+        display.textContent = seasonLabels[seasonIndex];
         display.style.color = '#fef08c';
 
-        document.title = `Time Travelling → ${seasonConfig[newSeason].name}`;
-        setTimeout(() => document.title = 'FoxPhantom Portfolio Template', 1800);
+        document.title = 'Time Travelling...';
+        setTimeout(() => { document.title = 'FoxPhantom Portfolio Template'; }, 1400);
     });
-}
-
-export { initClock };
+};

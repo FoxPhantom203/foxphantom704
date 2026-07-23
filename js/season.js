@@ -1,46 +1,40 @@
-// season.js - Handles seasonal logic and time travel
+// js/season.js - Pure global seasonal logic
 
-let currentSeason = 'summer'; // default
-
-const seasonConfig = {
-    spring: { name: 'March (Spring)', class: 'spring' },
-    summer: { name: 'June (Summer)', class: 'summer' },
-    autumn: { name: 'September (Autumn)', class: 'autumn' },
-    winter: { name: 'December (Winter)', class: 'winter' }
-};
-
-const seasonsOrder = ['spring', 'summer', 'autumn', 'winter'];
-
-function getRealSeason() {
+window.getRealSeason = function() {
     const now = new Date();
     const month = now.getMonth() + 1;
-    const day = now.getDate();
-
     if (month >= 3 && month <= 5) return 'spring';
     if (month >= 6 && month <= 8) return 'summer';
     if (month >= 9 && month <= 11) return 'autumn';
     return 'winter';
-}
+};
 
-function applySeason(season) {
-    currentSeason = season;
-    document.body.classList.remove(...Object.keys(seasonConfig));
-    document.body.classList.add(seasonConfig[season].class);
+window.applySeason = function(season) {
+    document.body.classList.remove('spring', 'summer', 'autumn', 'winter');
+    document.body.classList.add(season);
 
-    // Clear previous elements
-    const container = document.getElementById('season-elements') || document.createElement('div');
-    container.id = 'season-elements';
-    container.style.position = 'fixed';
-    container.style.top = '0';
-    container.style.left = '0';
-    container.style.width = '100%';
-    container.style.height = '100%';
-    container.style.pointerEvents = 'none';
-    container.style.zIndex = '1';
-    if (!document.getElementById('season-elements')) document.body.appendChild(container);
-    container.innerHTML = '';
+    const container = document.getElementById('season-elements');
+    if (container) container.innerHTML = '';
 
-    console.log(`%cSeason changed to ${seasonConfig[season].name}`, 'color: #a5b4fc; font-weight: bold;');
-}
+    if (season === 'summer') {
+        const sun = document.createElement('div');
+        sun.className = 'sun';
+        container.appendChild(sun);
+    } else if (season === 'winter') {
+        const snowLayer = document.createElement('div');
+        snowLayer.className = 'snow-layer';
+        for (let i = 0; i < 45; i++) {
+            const p = document.createElement('div');
+            p.className = 'snow-particle';
+            p.textContent = '❄';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 7 + 8) + 's';
+            p.style.opacity = 0.6 + Math.random() * 0.4;
+            p.style.fontSize = '1.1rem';
+            snowLayer.appendChild(p);
+        }
+        container.appendChild(snowLayer);
+    }
 
-export { applySeason, getRealSeason, seasonsOrder, seasonConfig };
+    console.log(`%cSwitched to ${season.toUpperCase()} season`, 'color:#a5b4fc');
+};
