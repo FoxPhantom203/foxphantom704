@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/dark-theme.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/season.css">
     <style>
         body { cursor: url('assets/cursor.png'), auto; font-family: 'Righteous', cursive; }
         .playfair { font-family: 'Playfair Display', serif; }
@@ -38,12 +39,23 @@
             border: 1px solid rgba(255,255,255,0.2);
             max-width: 400px;
         }
+        #clock {
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        #clock:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-cover bg-center min-h-screen flex flex-col items-center text-white" style="background-image: url('https://cdn.pixabay.com/photo/2024/09/06/02/03/hill-9026381_1280.png');">
 
     <header class="w-full p-6 flex justify-between items-center bg-black/50 backdrop-blur-md">
-        <div class="flex gap-8">
+        <div class="flex items-center gap-8">
+            <div id="clock" onclick="timeTravel()" class="flex items-center gap-2 hover:text-yellow-300 transition">
+                <span id="time-display">00:00</span>
+            </div>
             <a href="https://github.com/FoxPhantom203/foxphantom704" class="flex items-center gap-2 hover:text-red-500 transition">
                 <img src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="GitHub"> GitHub
             </a>
@@ -86,11 +98,15 @@
         </div>
     </div>
 
-    <main class="flex-grow flex flex-col items-center justify-center text-center p-6 w-full max-w-6xl">
+    <!-- Seasonal elements container -->
+    <div id="season-elements"></div>
+
+    <main class="flex-grow flex flex-col items-center justify-center text-center p-6 w-full max-w-6xl relative z-10">
         <img src="https://raw.githubusercontent.com/FoxPhantom203/foxphantom704/main/assets/favicon.png" alt="Logo" class="w-32 h-32 mb-4">
         <h1 class="text-6xl mb-6">FoxPhantom Template</h1>
         <p class="text-xl mb-8 max-w-2xl leading-relaxed">
-            A clean, modern portfolio / website template for developers and creators. Fork it, customize it, and build your own digital presence.
+            A clean, modern portfolio / website template for developers and creators. Fork it, customize it, and build your own digital presence.<br>
+            <span class="text-sm opacity-75">Click the clock for time travel (concept demo)</span>
         </p>
     </main>
 
@@ -99,10 +115,96 @@
             const modal = document.getElementById('linksModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
-        // Close modal if clicking outside
         document.getElementById('linksModal').addEventListener('click', function(e) {
             if (e.target === this) toggleLinks();
         });
+
+        // Seasonal logic
+        function getCurrentSeason() {
+            const now = new Date();
+            const month = now.getMonth() + 1; // 1-12
+            const day = now.getDate();
+
+            if ((month === 3 && day >= 1) || (month === 4) || (month === 5) || (month === 5 && day <= 31)) return 'spring';
+            if ((month >= 6 && month <= 8)) return 'summer';
+            if ((month === 9 && day >= 1) || (month === 10) || (month === 11)) return 'autumn';
+            return 'winter'; // Dec, Jan, Feb
+        }
+
+        function applySeason(season) {
+            document.body.classList.remove('spring', 'summer', 'autumn', 'winter');
+            document.body.classList.add(season);
+
+            const elements = document.getElementById('season-elements');
+            elements.innerHTML = '';
+
+            if (season === 'summer') {
+                const sun = document.createElement('div');
+                sun.className = 'sun';
+                elements.appendChild(sun);
+            } else if (season === 'winter') {
+                // Snowflakes
+                for (let i = 0; i < 60; i++) {
+                    const flake = document.createElement('div');
+                    flake.className = 'snowflake';
+                    flake.textContent = ['❄', '❅', '❆'][Math.floor(Math.random()*3)];
+                    flake.style.left = Math.random() * 100 + 'vw';
+                    flake.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                    flake.style.opacity = Math.random() * 0.6 + 0.4;
+                    flake.style.fontSize = (Math.random() * 1.2 + 0.8) + 'em';
+                    elements.appendChild(flake);
+                }
+                // Reindeer
+                const reindeer = document.createElement('div');
+                reindeer.className = 'reindeer';
+                reindeer.textContent = '🦌';
+                elements.appendChild(reindeer);
+                // Husky hint
+                console.log('%cA husky is adoring the snow nearby 🐺', 'color: #60a5fa; font-size: 14px;');
+            }
+        }
+
+        // Time travel feature
+        let currentSeasonIndex = 0;
+        const seasons = ['spring', 'summer', 'autumn', 'winter'];
+        const seasonNames = ['March (Spring)', 'June (Summer)', 'September (Autumn)', 'December (Winter)'];
+
+        function timeTravel() {
+            currentSeasonIndex = (currentSeasonIndex + 1) % 4;
+            const newSeason = seasons[currentSeasonIndex];
+            applySeason(newSeason);
+
+            const timeDisplay = document.getElementById('time-display');
+            timeDisplay.textContent = seasonNames[currentSeasonIndex];
+            timeDisplay.style.color = '#fef08c';
+
+            // Brief title change
+            document.title = 'Time Travelling... ' + seasonNames[currentSeasonIndex];
+            setTimeout(() => {
+                document.title = 'FoxPhantom Portfolio Template';
+            }, 2000);
+        }
+
+        // Initialize clock and season
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('time-display').textContent = timeStr;
+        }
+
+        // Init
+        window.onload = function() {
+            // Real season on load
+            const realSeason = getCurrentSeason();
+            applySeason(realSeason);
+
+            // Real time clock
+            updateClock();
+            setInterval(updateClock, 30000);
+
+            // Easter egg hint
+            console.log('%cSeasonal decorations active. Click the clock to time travel (demo).', 'color: #a5b4fc;');
+        };
     </script>
 </body>
 </html>
