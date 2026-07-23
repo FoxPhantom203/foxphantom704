@@ -112,7 +112,6 @@
     </main>
 
     <script>
-        // === FULLY INLINE SEASON + CLOCK LOGIC (synchronous & reliable) ===
         let currentSeason = 'summer';
 
         function getRealSeason() {
@@ -135,23 +134,10 @@
                 const sun = document.createElement('div');
                 sun.className = 'sun';
                 container.appendChild(sun);
-            } else if (season === 'winter') {
-                const snowLayer = document.createElement('div');
-                snowLayer.className = 'snow-layer';
-                for (let i = 0; i < 45; i++) {
-                    const p = document.createElement('div');
-                    p.className = 'snow-particle';
-                    p.textContent = '❄';
-                    p.style.left = Math.random() * 100 + 'vw';
-                    p.style.animationDuration = (8 + Math.random() * 7) + 's';
-                    p.style.opacity = 0.6 + Math.random() * 0.4;
-                    snowLayer.appendChild(p);
-                }
-                container.appendChild(snowLayer);
             }
+            // Winter: pure CSS aurora only (no particles)
         }
 
-        // Clock + Time Travel
         function initClock() {
             const clock = document.getElementById('clock');
             const display = document.getElementById('time-display');
@@ -180,22 +166,10 @@
             });
         }
 
-        // Battery Status (if available)
-        function showBatteryStatus() {
-            if ('getBattery' in navigator) {
-                navigator.getBattery().then(battery => {
-                    console.log(`%cBattery: ${Math.floor(battery.level * 100)}%`, 'color: #86efac;');
-                    // Could display in UI if desired
-                });
-            }
-        }
-
-        // Initialize everything synchronously
         window.addEventListener('load', () => {
             applySeason(getRealSeason());
             initClock();
-            showBatteryStatus();
-            console.log('%c✅ Clock + Seasons fully active. Click clock to time travel.', 'color: #67e8f9; font-weight: bold;');
+            console.log('%c✅ Clock + Pure CSS Seasons active (Aurora winter).', 'color: #67e8f9; font-weight: bold;');
         });
 
         function toggleLinks() {
