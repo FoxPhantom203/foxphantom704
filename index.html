@@ -95,25 +95,35 @@
 <body class="bg-cover bg-center min-h-screen flex flex-col items-center text-white" style="background-image: url('https://cdn.pixabay.com/photo/2024/09/06/02/03/hill-9026381_1280.png');">
 
     <header class="w-full p-6 flex justify-between items-center bg-black/50 backdrop-blur-md">
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-8">
             <div id="clock" class="flex items-center gap-2 hover:text-yellow-300 transition text-xl font-bold">
                 <span id="time-display">00:00</span>
             </div>
-            <a href="https://odysee.com/@FoxPhantom203:7?view=home" target="_blank" class="flex items-center gap-2 hover:text-red-500 transition">
-                <img src="https://www.google.com/s2/favicons?domain=odysee.com&sz=32" alt="Odysee"> Odysee
-            </a>
-            <a href="https://archive.org/details/@architect787" target="_blank" class="flex items-center gap-2 hover:text-red-500 transition">
-                <img src="https://www.google.com/s2/favicons?domain=archive.org&sz=32" alt="Internet Archive"> Archive
-            </a>
         </div>
         <button onclick="toggleLinks()" class="px-6 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center gap-2 transition">
-            Links
+            Support Links
         </button>
     </header>
 
     <div id="linksModal" class="links-modal hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
         <div class="links-content bg-zinc-900 p-8 rounded-2xl border border-orange-500/30 max-w-md w-full">
-            <h2 class="text-3xl mb-6 text-center text-orange-400">Support Links</h2>
+            <h2 class="text-3xl mb-8 text-center text-orange-400">Support Links</h2>
+            <div class="space-y-4">
+                <a href="https://odysee.com/@FoxPhantom203:7?view=home" target="_blank" class="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition">
+                    <img src="https://www.google.com/s2/favicons?domain=odysee.com&sz=32" alt="Odysee" class="w-8 h-8">
+                    <div>
+                        <div class="font-bold">Odysee</div>
+                        <div class="text-sm opacity-75">Videos &amp; Content</div>
+                    </div>
+                </a>
+                <a href="https://archive.org/details/@architect787" target="_blank" class="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition">
+                    <img src="https://www.google.com/s2/favicons?domain=archive.org&sz=32" alt="Internet Archive" class="w-8 h-8">
+                    <div>
+                        <div class="font-bold">Internet Archive</div>
+                        <div class="text-sm opacity-75">@architect787</div>
+                    </div>
+                </a>
+            </div>
             <button onclick="toggleLinks()" class="mt-8 w-full py-3 bg-orange-600 hover:bg-orange-500 rounded-xl transition">Close</button>
         </div>
     </div>
@@ -214,7 +224,7 @@
         window.addEventListener('load', () => {
             initClock();
             initCustomCursor();
-            console.log('%c✅ Fox-like custom cursor updated!', 'color: #f97316; font-weight: bold;');
+            console.log('%c✅ Updated!', 'color: #f97316; font-weight: bold;');
         });
 
         document.getElementById('linksModal').addEventListener('click', function(e) {
