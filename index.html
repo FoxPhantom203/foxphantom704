@@ -43,17 +43,6 @@
             transform: rotate(-25deg);
         }
         
-        /* Fallback shape if emoji not desired */
-        .custom-cursor.fallback {
-            width: 0;
-            height: 0;
-            border-left: 16px solid transparent;
-            border-right: 16px solid transparent;
-            border-bottom: 28px solid transparent;
-            background: linear-gradient(135deg, #f97316 30%, #ffffff);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-        
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 12px;
@@ -75,7 +64,6 @@
             background: linear-gradient(to bottom, #fb923c, #f59e0b);
         }
         
-        /* Other styles remain */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -107,12 +95,15 @@
 <body class="bg-cover bg-center min-h-screen flex flex-col items-center text-white" style="background-image: url('https://cdn.pixabay.com/photo/2024/09/06/02/03/hill-9026381_1280.png');">
 
     <header class="w-full p-6 flex justify-between items-center bg-black/50 backdrop-blur-md">
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-6">
             <div id="clock" class="flex items-center gap-2 hover:text-yellow-300 transition text-xl font-bold">
                 <span id="time-display">00:00</span>
             </div>
-            <a href="https://github.com/FoxPhantom203/foxphantom704" class="flex items-center gap-2 hover:text-red-500 transition">
-                <img src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="GitHub"> GitHub
+            <a href="https://odysee.com/@FoxPhantom203:7?view=home" target="_blank" class="flex items-center gap-2 hover:text-red-500 transition">
+                <img src="https://www.google.com/s2/favicons?domain=odysee.com&sz=32" alt="Odysee"> Odysee
+            </a>
+            <a href="https://archive.org/details/@architect787" target="_blank" class="flex items-center gap-2 hover:text-red-500 transition">
+                <img src="https://www.google.com/s2/favicons?domain=archive.org&sz=32" alt="Internet Archive"> Archive
             </a>
         </div>
         <button onclick="toggleLinks()" class="px-6 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center gap-2 transition">
