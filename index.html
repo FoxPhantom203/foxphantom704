@@ -17,38 +17,44 @@
     <link rel="stylesheet" href="css/projects.css">
     <link rel="stylesheet" href="css/scroll_bar.css">
     <style>
-        /* Custom Cursor: Orange inner dot, white outer ring (borderless feel) */
         body {
             cursor: none;
             font-family: 'Righteous', cursive;
         }
         
+        /* Fox-like pointer cursor with orange-white gradient */
         .custom-cursor {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
+            width: 32px;
+            height: 32px;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease, width 0.2s, height 0.2s;
+            transition: transform 0.15s ease;
         }
         
-        .custom-cursor::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background-color: #f97316; /* Orange */
-            border-radius: 50%;
-            z-index: 1;
+        .custom-cursor::before {
+            content: '🦊';
+            font-size: 28px;
+            display: block;
+            filter: drop-shadow(0 0 6px #f97316);
+            background: linear-gradient(135deg, #f97316, #fed7aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: rotate(-25deg);
         }
         
-        /* Custom Scrollbar Enhancements */
+        /* Fallback shape if emoji not desired */
+        .custom-cursor.fallback {
+            width: 0;
+            height: 0;
+            border-left: 16px solid transparent;
+            border-right: 16px solid transparent;
+            border-bottom: 28px solid transparent;
+            background: linear-gradient(135deg, #f97316 30%, #ffffff);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 12px;
             height: 12px;
@@ -69,7 +75,7 @@
             background: linear-gradient(to bottom, #fb923c, #f59e0b);
         }
         
-        /* Tech Stack & Bio Styles */
+        /* Other styles remain */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -117,7 +123,6 @@
     <div id="linksModal" class="links-modal hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
         <div class="links-content bg-zinc-900 p-8 rounded-2xl border border-orange-500/30 max-w-md w-full">
             <h2 class="text-3xl mb-6 text-center text-orange-400">Support Links</h2>
-            <!-- Add links as needed -->
             <button onclick="toggleLinks()" class="mt-8 w-full py-3 bg-orange-600 hover:bg-orange-500 rounded-xl transition">Close</button>
         </div>
     </div>
@@ -127,7 +132,6 @@
         <h1 class="text-7xl mb-4 tracking-tight">FoxPhantom</h1>
         <p class="text-2xl mb-8 text-orange-300">Full-Stack Developer &amp; Creator</p>
 
-        <!-- Developer Bios Section: Multiple descriptive texts (1-1000 chars range) -->
         <div class="w-full mb-12">
             <h2 class="text-4xl mb-6 text-left">About Me</h2>
             <div class="developer-bio grid grid-cols-1 md:grid-cols-2 gap-6 text-left text-lg leading-relaxed bg-black/40 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
@@ -139,14 +143,12 @@
                     <p>Constantly exploring new tools and paradigms, I love contributing to open source and helping others level up their skills. Every project is an opportunity to push creative boundaries.</p>
                     <p class="mt-4">Whether it's a sleek portfolio, robust API, or engaging game prototype — I'm ready to code it.</p>
                 </div>
-                <!-- Additional varied descriptions -->
                 <div class="md:col-span-2">
                     <p>Developer by day, problem-solver by night. I thrive on challenges that require both technical precision and creative flair. My stack evolves with the industry, always staying ahead of the curve.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Tech Stack -->
         <div class="w-full mb-12">
             <h3 class="text-4xl mb-8 text-orange-400">Tech Stack</h3>
             <div class="tech-stack">
@@ -165,12 +167,10 @@
             </div>
         </div>
 
-        <!-- Projects Section (kept placeholder) -->
         <div class="w-full">
             <h2 class="text-4xl mb-8">Featured Projects</h2>
             <div class="projects-container">
                 <div class="projects-slider">
-                    <!-- Add project cards as needed -->
                     <a href="#" class="project-card">Project 1</a>
                     <a href="#" class="project-card">Project 2</a>
                     <a href="#" class="project-card coming-soon-card">More Coming Soon</a>
@@ -180,7 +180,6 @@
     </main>
 
     <script>
-        // Simple Clock (no time travel or seasons)
         function initClock() {
             const display = document.getElementById('time-display');
             function updateTime() {
@@ -191,27 +190,31 @@
             setInterval(updateTime, 30000);
         }
 
-        // Custom Cursor
         function initCustomCursor() {
             const cursor = document.createElement('div');
             cursor.className = 'custom-cursor';
             document.body.appendChild(cursor);
 
+            let isMoving = false;
+
             document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
+                cursor.style.left = (e.clientX - 8) + 'px';
+                cursor.style.top = (e.clientY - 8) + 'px';
+                
+                if (!isMoving) {
+                    isMoving = true;
+                    setTimeout(() => { isMoving = false; }, 50);
+                }
             });
 
-            // Click effect
             document.addEventListener('mousedown', () => {
-                cursor.style.transform = 'scale(0.7)';
+                cursor.style.transform = 'scale(0.85) rotate(-35deg)';
             });
             document.addEventListener('mouseup', () => {
-                cursor.style.transform = 'scale(1)';
+                cursor.style.transform = 'scale(1) rotate(-25deg)';
             });
         }
 
-        // Toggle Links Modal
         function toggleLinks() {
             const modal = document.getElementById('linksModal');
             modal.classList.toggle('hidden');
@@ -220,10 +223,9 @@
         window.addEventListener('load', () => {
             initClock();
             initCustomCursor();
-            console.log('%c✅ Portfolio updated: Custom cursor, scrollbar, Tech Stack & clean design.', 'color: #f97316; font-weight: bold;');
+            console.log('%c✅ Fox-like custom cursor updated!', 'color: #f97316; font-weight: bold;');
         });
 
-        // Close modal on outside click
         document.getElementById('linksModal').addEventListener('click', function(e) {
             if (e.target === this) toggleLinks();
         });
